@@ -1,0 +1,407 @@
+/* zrt-cssregistry: */
+
+@media all {
+
+  /*
+  ** COMMON FORUM STYLES
+  */
+
+  .zojax-forum a {
+    text-decoration: none;
+  }
+  
+  /*
+  ** HEADER STYLES
+  */
+  
+  .f-actions {
+    padding-top: 0.75em;
+    overflow: hidden;
+  }
+  
+  /* pager */
+  .f-actions-pager {
+    display: block;
+    margin-top: 0.2em;
+    font-size: 90%;
+  }
+  
+  /* forum views at the top */
+    
+  .f-views {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 90%;
+  }
+  .f-views li {
+    display: inline;
+    margin-right: 0.5em;
+    font-weight: bold;
+  }
+  .f-views li a {
+    padding: 0em 0.5em;
+    text-decoration: none;
+    border-bottom: 3px borderStyle evenRowBackgroundColor;
+  }
+  .f-views li a:hover {
+    color: fontColor;
+    text-decoration: none;
+    border-bottom: 3px borderStyle globalBorderColor;
+  }
+  .f-views li.selected a {
+    color: fontColor;
+    text-decoration: none;
+    border-bottom: 3px borderStyle evenRowBackgroundColor;
+  }
+  
+  /* forum views at the bottom */
+
+  #f-actions-bottom {
+  }
+  #f-actions-bottom .f-views li a {
+    border-bottom: none;
+    border-top: 3px borderStyle evenRowBackgroundColor;
+  }
+  #f-actions-bottom .f-views li a:hover {
+    border-top: 3px borderStyle globalBorderColor;
+    border-bottom: none;
+  }
+
+  /* z-table */
+  .zojax-forum .z-table { 
+    border-top: 1px solid globalBorderColor;
+    border-left: 1px solid globalBorderColor;
+  }
+
+  /*
+  ** TOPICS TABLE
+  */
+  
+  .f-topics {
+    margin: 0.5em 0;
+    width: 100%;
+  }
+
+  .f-topics th,
+  .f-topics td {
+    padding: 0.3em 1em;
+    vertical-align: middle;
+  }
+  .f-topics th {
+    padding: 0.35em 1em;
+    text-align: center;
+    text-transform: none;
+    font-size: 90%;
+    background-color: globalBackgroundColor;
+    color: discreetColor;
+    border-bottom: 1px solid globalBorderColor;
+  }
+  .f-topics td {
+    padding: 0.5em 0.7em;
+    border-bottom: 1px dotted globalBorderColor;    
+  }
+  .f-topics td.f-title div {
+    font-weight: normal;
+  }
+  
+  /* topics table columns */
+  td.f-icon {
+    width: 1%;
+  }
+
+  td.f-title {
+    font-weight: bold;
+  }
+
+  td.f-title a:hover {
+    text-decoration: underline;
+  }
+
+  td.f-owner { 
+    width: 10%;
+    text-align: center;
+  }
+
+  td.f-stats { 
+    text-align: center;
+    width: 5%;
+  }
+
+  td.f-stats div { 
+    white-space: nowrap;
+  }
+
+  td.f-info {
+    width: 22%;
+    font-size: 90%;
+    color: discreetColor;
+    white-space: nowrap;
+    border-right: 0;
+  }
+  td.f-info .f-date {
+    color: fontColor;
+    white-space: nowrap;
+  }
+  td.f-last {
+    width: 15px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0.5em;
+  }
+  td.f-last a img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /*.zojax-forum .f-icon {
+    float: left;
+    clear: left;
+  }*/
+
+  .zojax-forum div.f-stats {
+    font-size: 80%;
+    float: right;
+    color: discreetColor;
+  }
+  
+  .zojax-forum .z-content-parent {
+    padding: 1px 0px 1px 16px;
+    font-size: 80%;
+    display: block;
+    padding-bottom: 0.5em;
+  }
+  
+  .zojax-forum .f-topic-nav {
+    clear: both;
+    float: right;
+    margin: 0 0 2em 0;
+    font-size: 90%;
+  }
+
+  .zojax-forum .f-forum-description { 
+    font-size: fontSmallSize;
+    margin-bottom: 1em;
+  }
+
+  .zojax-forum .f-header { 
+    width: 100%;
+  }
+
+  .zojax-forum .f-header tr { 
+    vertical-align: top;
+  }
+
+  .zojax-forum .f-subfolder { 
+    padding-top: 2em;
+  }
+
+  .zojax-forum .f-forum-icon {
+    padding-top: 0.5em;
+    padding-right: 0.5em;
+    background-color: contentBackgroundColor;
+    width: 1%;
+  }
+  
+  .zojax-forum table.z-table {
+    clear: both;
+    width: 100%;
+    margin-bottom: 0.5em;
+    border: none;
+  }
+
+  .zojax-forum table.z-table th {
+    white-space: nowrap;
+    font-size: fontSmallSize;
+    padding: 0.3em 0.8em 0.3em 0.8em;
+    color: fontColor;
+    background: globalBackgroundColor;
+    border-top: borderWidth borderStyle globalBorderColor;
+    border-bottom: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum table.z-table td {
+    padding: 0.5em;
+    border-bottom: borderWidth dotted globalBorderColor;
+    font-size: fontSmallSize;
+  }
+
+  .zojax-forum table.z-table td.f-title {
+    border-left: borderWidth borderStyle globalBorderColor;
+    border-right: borderWidth borderStyle globalBorderColor;
+  }  
+
+  .zojax-forum table.z-table td.f-icon {
+    font-size: 100%;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: left;
+    float: none;
+    width: 26px;
+  }
+
+  .zojax-forum table.z-table td.f-spacer {
+    vertical-align: bottom;
+    font-size: 0.3em;
+    height: 0.3em;
+    padding: 0;
+    background: globalBackgroundColor;
+    border: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum table.z-table .f-user {
+    padding: 0.5em 1em 0.5em 1em;
+    width: 80px;
+    vertical-align: top;
+  }
+
+  .zojax-forum .f-messages { 
+    padding-top: 0.5em;
+  }
+
+  .zojax-forum .f-message {
+    font-size: 100%;
+    vertical-align: top;
+    background: globalBackgroundColor;
+    margin-bottom: 0.75em;
+    overflow: hidden;
+    border: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum .f-message .f-user {
+    width: 100px;
+    padding: 1.25em 1em 0.5em 1em;
+    vertical-align: top;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .zojax-forum .f-message .f-user-avatar {
+    padding-bottom: 0.5em;
+  }
+
+  .zojax-forum .f-msg-toplink { 
+    clear: both;
+  }
+
+  .zojax-forum .f-message .f-msg-body {
+    color: fontColor;
+    overflow: hidden;
+    margin: 0.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    background: evenRowBackgroundColor;
+    border: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum .f-message .f-msg-header {
+    padding-left: 0.5em;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+    border-bottom: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum .f-message .f-msg-content {
+    padding-top: 0.5em;
+    padding-bottom: 1.5em;
+  }
+
+  .zojax-forum .f-message .f-title {
+    font-size: 120%;
+  }
+  
+  .zojax-forum .f-message .f-date {
+    font-weight: bold;
+    font-size: 90%;
+  }
+
+  .zojax-forum .f-message .f-date span {
+    font-weight: normal;
+    color: discreetColor;
+  }
+
+  .zojax-forum .f-top { 
+    width: 99.5%;
+  }
+
+  .zojax-forum .f-pages {
+    font-size: 90%;
+  }
+
+  .zojax-forum .f-pages .f-label {
+    color: discreetColor;
+  }
+
+  .zojax-forum .f-pages .f-link {
+    padding-left: 1em;
+  }
+  
+  .zojax-forum .f-title .f-pages {
+    margin-top: 0.5em;
+    color: discreetColor;
+    font-size: 90%;
+  }
+  
+  .zojax-forum .f-title .f-pages span {
+    border-top: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum .f-bottom { 
+    clear: both;
+  }
+  
+  .zojax-forum .f-bottom tr { 
+    vertical-align: top;
+  }
+  
+  .zojax-forum .f-topic-quickreply {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .zojax-forum .f-signature {
+    color: discreetColor;
+    font-size: fontSmallSize;
+    font-weight: normal;
+    margin-top: 3em;
+    vertical-align: bottom;
+  }
+
+  .zojax-forum .f-signature span {
+    border-top: borderWidth borderStyle globalBorderColor;
+  }
+  
+  .zojax-forum .f-inline {
+    padding: 1em;
+  }
+  
+  .zojax-forum .f-quickreply {
+    font-size: fontSmallSize;
+  }
+  
+  .zojax-forum .f-quickreply textarea {
+    height: 7em;
+  }
+
+  .zojax-forum .f-msg-menu { 
+    float: right;
+    text-align: right;
+  }
+
+  .zojax-forum .f-msg-menu a { 
+    color: discreetColor;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    border-bottom: borderWidth borderStyle globalBorderColor;
+  }
+
+  .zojax-forum .f-msg-menu a:hover { 
+    color: linkColor;
+  }
+
+  .f-user {
+    float: left;
+    width: 18%;
+  }
+
+}

@@ -1,0 +1,10 @@
+<div i18n:domain="zojax.forum" class="zojax-forum"
+     tal:define="libs resourcepackage:zojax-forum">
+
+  <h1 class="z-content-title" tal:content="context/title">Title</h1>
+  <div class="z-page-description"
+       tal:content="context/description" tal:condition="context/description"></div>
+
+  <tal:block define="context python:context['00000']"
+       content="structure pagelet:forum.message.view" />
+</div>

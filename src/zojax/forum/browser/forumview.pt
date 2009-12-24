@@ -1,0 +1,33 @@
+<tal:block i18n:domain="zojax.forum">
+<div class="f-actions" id="f-actions-top">
+  <span class="f-actions-pager"
+	tal:content="structure view/batch/@@pagelet/batch.view" />
+</div>
+
+<table class="f-topics" tal:condition="view/topics" cellspacing="0">
+  <thead>
+    <tr>
+      <th class="f-icon" >&nbsp;</th>
+      <th class="f-title" i18n:translate="">Subject</th>
+      <th class="f-owner" i18n:translate="">Author</th>
+      <th class="f-stats" i18n:translate="">Replies</th>
+      <th class="f-info" colspan="2" i18n:translate="">Last post</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="context view/batch"
+	tal:attributes="class python:repeat['context'].odd() 
+			and 'odd' or 'even'">
+	<tal:block tal:content="structure pagelet:+forumview" />
+    </tr>
+  </tbody>
+</table>
+  
+<div class="f-actions" id="f-actions-bottom" tal:condition="view/bottomLinks">
+  <span class="f-actions-pager" tal:content="structure view/batch/@@pagelet/batch.view" />
+</div>
+
+<div tal:condition="not:view/topics" i18n:translate="">
+  There are no discussions in this forum.
+</div>
+</tal:block>

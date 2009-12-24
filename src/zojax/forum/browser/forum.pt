@@ -1,0 +1,75 @@
+<div i18n:domain="zojax.forum" class="zojax-forum"
+     tal:define="libs resourcepackage:zojax-forum">
+
+  <table class="f-header" tal:omit-tag="view/noIcon">
+    <tr tal:omit-tag="view/noIcon">
+      <td class="f-forum-icon" tal:condition="not:view/noIcon">
+        <img src="icon" />
+      </td>
+      <td tal:omit-tag="view/noIcon">
+        <tal:block content="structure pagelet:+context.actions" />
+        <h1 class="z-content-title" tal:content="context/title"></h1>
+        <div class="f-forum-description" tal:condition="context/description"
+             tal:content="context/description"></div>
+        <a href="../" class="z-content-parent" i18n:translate="">
+          Up one level
+        </a>
+        <div class="f-forum-text" tal:condition="context/text"
+             tal:content="structure context/text/cooked"></div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="f-actions" tal:condition="view/menu|view/searching">
+    <form method="post" tal:attributes="action request/URL">
+
+    <ul class="f-views" tal:define="url context/@@absolute_url">
+      <li tal:condition="view/submitTopic">
+        <a tal:attributes="href string:$url/+/forum.topic/index.html"
+           i18n:translate="">
+          New topic
+        </a>
+      </li>
+      <li tal:condition="view/subscribed">
+        <a tal:attributes="href string:$url/subscribe.html" i18n:translate="">
+          Unsubscribe
+        </a>
+      </li>
+      <li tal:condition="not:view/subscribed">
+	<a tal:attributes="href string:$url/subscribe.html" i18n:translate="">
+	  Subscribe
+	</a>
+      </li>
+      <li tal:condition="view/searching">
+        <input type="text" name="form.searchforum"
+               tal:attributes="value view/searchableText|nothing" />
+        <input type="submit"
+               name="form.button.search" value="Search" />
+        <tal:block condition="python:view.searchResults is not None">
+          <input type="submit" class="z-form-cancelbutton"
+		 name="form.button.clear" value="Clear" />
+        </tal:block>
+      </li>
+    </ul>
+    </form>
+  </div>
+  
+  <tal:block condition="python:view.searchResults is None"
+	     content="structure pagelet:+view" />
+  
+  <tal:block condition="python:view.searchResults is not None">
+    <tal:block content="structure view/searchResults/@@pagelet/batch.view" />
+    <br />
+    
+    <div tal:repeat="message view/searchResults">
+      <br />
+      <tal:block tal:define="topic nocall:message/__parent__">
+        <h3><a tal:content="topic/title"
+               tal:attributes="href string:${message/@@absolute_url}/"></a></h3>
+        <div class="discreet" tal:content="topic/description"></div>
+        <tal:block content="structure message/@@pagelet/forum.message.view" />
+      </tal:block>
+    </div>
+  </tal:block>
+  
+</div>

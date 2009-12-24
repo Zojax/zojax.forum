@@ -1,0 +1,20 @@
+<div class="f-top">
+  <div class="f-pages">
+    <tal:block tal:content="structure view/batchView" />
+    <a class="f-link" href="#bottom" i18n:translate=""
+       tal:condition="python:len(view.batch)>4">Go down</a>
+  </div>
+</div>
+
+<div class="f-messages">
+  <tal:block tal:repeat="message view/listMessages"
+             tal:content="structure message"/>
+</div>
+
+<a name="bottom"></a>  
+<div class="wide f-bottom" tal:condition="python:len(context)>3">
+  <div class="f-pages">
+    <tal:block tal:content="structure view/batchView" />
+    <a class="f-link" href="#top" i18n:translate="">Go up</a>
+  </div>
+</div>

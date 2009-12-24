@@ -1,0 +1,78 @@
+Topics
+======
+
+  >>> from zope import interface
+  >>> from zojax.forum.topics import Topics
+
+  >>> topics = Topics()
+
+  >>> class Obj(object):
+  ...     def __init__(self, name):
+  ...         self.__name__ = name
+  ...     def __repr__(self):
+  ...         return "<Obj '%s'>"%self.__name__
+
+
+  >>> obj1 = Obj('1')
+  >>> obj2 = Obj('2')
+  >>> obj3 = Obj('3')
+  >>> obj4 = Obj('4')
+  >>> obj5 = Obj('5')
+
+  >>> topics.append(obj3)
+  >>> topics.append(obj4)
+  >>> topics.append(obj2)
+  >>> topics.append(obj5)
+  >>> topics.append(obj1)
+
+  >>> len(topics)
+  5
+
+  >>> for idx in topics:
+  ...     print topics[idx]
+  <Obj '1'>
+  <Obj '5'>
+  <Obj '2'>
+  <Obj '4'>
+  <Obj '3'>
+
+  >>> topics.append(obj5)
+  >>> for idx in topics:
+  ...     print topics[idx]
+  <Obj '5'>
+  <Obj '1'>
+  <Obj '2'>
+  <Obj '4'>
+  <Obj '3'>
+
+  >>> topics.append(obj3)
+  >>> for idx in topics:
+  ...     print topics[idx]
+  <Obj '3'>
+  <Obj '5'>
+  <Obj '1'>
+  <Obj '2'>
+  <Obj '4'>
+
+  >>> topics.remove(obj1)
+  >>> for idx in topics:
+  ...     print topics[idx]
+  <Obj '3'>
+  <Obj '5'>
+  <Obj '2'>
+  <Obj '4'>
+
+  >>> topics[1:3]
+  [<Obj '5'>, <Obj '2'>]
+
+  >>> topics.next(obj5)
+  <Obj '2'>
+
+  >>> print topics.next(obj4)
+  None
+
+  >>> topics.previous(obj5)
+  <Obj '3'>
+
+  >>> print topics.previous(obj3)
+  None

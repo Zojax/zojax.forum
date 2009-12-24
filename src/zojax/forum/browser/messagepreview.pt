@@ -1,0 +1,6 @@
+<br />
+<div i18n:domain="zojax.forum" class="zojax-forum"
+     tal:define="libs resourcepackage:zojax-forum">
+
+  <tal:block content="structure context/@@pagelet/forum.message.view" />
+</div>

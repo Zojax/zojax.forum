@@ -1,0 +1,40 @@
+<div i18n:domain="zojax.forum" class="zojax-forum"
+     tal:define="libs resourcepackage:zojax-forum">
+
+  <a name="top"></a>
+  <tal:block content="structure pagelet:+context.actions" />
+  <h1 class="z-content-title" tal:content="context/title">Title</h1>
+
+  <div class="f-stats" i18n:translate="">
+    Replies: <tal:block i18n:name="number" tal:content="view/topicInfo/replies"/>
+  </div>
+
+  <a href="../" class="z-content-parent" i18n:translate="">
+    Up one level
+  </a>
+
+  <div class="f-topic-nav" 
+       tal:condition="view/topicInfo/next|view/topicInfo/prev|nothing">
+    <a tal:define="prev view/topicInfo/prev|nothing" tal:condition="prev"
+       tal:attributes="href string:../${prev/name}/; title prev/title" 
+       i18n:translate="">
+      « previous
+    </a>
+    <a tal:define="next view/topicInfo/next|nothing" tal:condition="next"
+       tal:attributes="href string:../${next/name}/;title next/title" 
+       i18n:translate="">
+      next »
+    </a>
+  </div>
+
+  <div class="z-page-description"
+       tal:content="context/description"
+       tal:condition="context/description"></div>
+
+  <tal:block content="structure pagelet:+topic.page" />
+
+  <tal:block tal:condition="nocall:view/reply">
+    <br /><br />
+    <tal:block tal:content="structure view/reply/render" />
+  </tal:block>
+</div>

@@ -1,0 +1,200 @@
+  Batching for IThreadRoot
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's create ThreadRoot
+
+  >>> from pytz import UTC
+  >>> from datetime import datetime
+
+  >>> from zojax.forum import interfaces
+  >>> from zojax.forum.tests import ChildContainer
+
+  >>> from zojax.forum.browser import batching
+
+  >>> container = ChildContainer()
+
+Batch on empty root
+
+  >>> batch = batching.Batch(container, start=5, size=3)
+
+  >>> batch = batching.Batch(container, size=3)
+  >>> len(batch)
+  0
+  >>> batch.firstElement
+  Traceback (most recent call last):
+  ...
+  IndexError: ...
+
+  >>> batch.lastElement
+  Traceback (most recent call last):
+  ...
+  IndexError: ...
+
+  >>> batch[0]
+  Traceback (most recent call last):
+  ...
+  IndexError: ...
+
+  >>> batch.next is None
+  True
+
+  >>> batch.previous is None
+  True
+
+  >>> from zojax.forum.tests import Child
+  >>> container['00001']=Child('00001', datetime(2007, 1, 2, 0, 0, 0, tzinfo=UTC))
+  >>> container['00002']=Child('00002', datetime(2007, 1, 2, 0, 1, 0, tzinfo=UTC))
+  >>> container['00003']=Child('00003', datetime(2007, 1, 2, 1, 1, 0, tzinfo=UTC))
+  >>> container['00004']=Child('00004', datetime(2007, 1, 1, 1, 1, 1, tzinfo=UTC))
+  >>> container['00005']=Child('00005', datetime(2007, 1, 2, 0, 1, 0, tzinfo=UTC))
+  >>> container['00006']=Child('00006', datetime(2007, 1, 1, 1, 6, 1, tzinfo=UTC))
+  >>> container['00007']=Child('00007', datetime(2007, 1, 1, 1, 7, 1, tzinfo=UTC))
+  >>> container['00008']=Child('00008', datetime(2007, 1, 1, 1, 8, 1, tzinfo=UTC))
+  >>> container['00009']=Child('00009', datetime(2007, 1, 1, 1, 9, 1, tzinfo=UTC))
+  >>> container['00010']=Child('00010', datetime(2007, 1, 1, 1, 10, 1, tzinfo=UTC))
+  >>> container['00011']=Child('00011', datetime(2007, 1, 1, 1, 11, 1, tzinfo=UTC))
+  >>> container['00012']=Child('00012', datetime(2007, 1, 1, 1, 12, 1, tzinfo=UTC))
+  >>> container['00013']=Child('00013', datetime(2007, 1, 1, 1, 13, 1, tzinfo=UTC))
+
+We can now create a batch for this sequence. Let's make our batch size 3:
+
+  >>> batch = batching.Batch(container, size=3)
+
+The first argument to the batch is always the full sequence. If no start
+element is specified, the batch starts at the first element:
+
+  >>> list(batch)
+  [Child<00004>, Child<00006>, Child<00007>]
+
+The start index is commonly specified in the constructor though:
+
+  >>> batch = batching.Batch(container, start=6, size=3)
+  >>> list(batch)
+  [Child<00011>, Child<00012>, Child<00013>]
+
+Note that the start is an index and starts at zero. If the start index is
+greater than the largest index of the sequence, an index error is raised:
+
+  >>> batching.Batch(container, start=16, size=3)
+  Traceback (most recent call last):
+  ...
+  IndexError: start index key out of range
+
+A batch implements the finite sequence interface and thus supports some
+standard methods. For example, you can ask the batch for its length:
+
+  >>> len(batch)
+  3
+
+Note that the length returns the true size of the batch, not the size we asked
+for:
+
+  >>> len(batching.Batch(container, start=12, size=3))
+  1
+
+You can also get an element by index, which is relative to the batch:
+
+  >>> batch[0]
+  Child<00011>
+  >>> batch[1]
+  Child<00012>
+  >>> batch[2]
+  Child<00013>
+
+If you ask for inex that is out of range, an index error is raised:
+
+  >>> batch[3]
+  Traceback (most recent call last):
+  ...
+  IndexError: batch index out of range
+
+You can also iterate through the batch:
+
+  >>> iterator = iter(batch)
+  >>> iterator.next()
+  Child<00011>
+  >>> iterator.next()
+  Child<00012>
+  >>> iterator.next()
+  Child<00013>
+
+Besides all of those common API methods, there are several properties that were
+designed to make your life simpler. The start and size are specified:
+
+  >>> batch.start
+  6
+  >>> batch.size
+  3
+
+The end index of the batch is immediately computed:
+
+  >>> batch.end
+  8
+
+Batch index
+
+  >>> batch.index
+  2
+
+
+The UI often requires that the number of the btach and the total number of
+batches is computed:
+
+  >>> batch.number
+  3
+  >>> batch.total
+  5
+
+You can also ask for the next batch:
+
+  >>> batch.next
+  <Batch start=9, size=3>
+
+If the current batch is the last one, the next batch is None:
+
+  >>> batching.Batch(container, start=12, size=3).next is None
+  True
+
+The previous batch shows the previous batch:
+
+  >>> batch.previous
+  <Batch start=3, size=3>
+
+If the current batch is the first one, the previous batch is None:
+
+  >>> batching.Batch(container, start=0, size=3).previous is None
+  True
+
+The final two properties deal with the elements within the batch. They ask for
+the first and last element of the batch:
+
+  >>> batch.firstElement
+  Child<00011>
+
+  >>> batch.lastElement
+  Child<00013>
+
+
+We can get access to all batches
+
+  >>> container['00014']=Child('00014', datetime(2007, 1, 1, 1, 14, 1, tzinfo=UTC))
+  >>> container['00015']=Child('00015', datetime(2007, 1, 1, 1, 15, 1, tzinfo=UTC))
+
+  >>> batch = batching.Batch(container, start=5, size=5)
+
+  >>> len(batch.batches)
+  3
+
+  >>> batch.batches[0]
+  <Batch start=0, size=5>
+
+  >>> batch.batches[2]
+  <Batch start=10, size=5>
+
+  >>> batch.batches[3]
+  Traceback (most recent call last):
+  ...
+  IndexError: ...
+
+  >>> batch.batches[-1]
+  <Batch start=10, size=5>

@@ -1,0 +1,67 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.forum">
+
+  <zojax:content
+     title="Discussion"
+     name="forum.topic"
+     class=".topic.Topic"
+     schema=".interfaces.ITopic"
+     description="Start discussion in forum."
+     contains="forum.message"
+     containers="content.forum workspace.forum"
+     contenttype=".interfaces.ITopicType"
+     type=".interfaces.ITopicContentType
+           zojax.content.type.interfaces.IActivePortalType"
+     permission="zojax.forum.AddTopic" />
+
+  <class class=".topic.Topic">
+    <implements interface="zojax.activity.interfaces.IActivityAware" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IContentNamesContainer" />
+    <implements interface="zojax.content.type.interfaces.IContainerContentsAware" />
+    <implements interface="zojax.ownership.interfaces.IOwnerAware" />
+
+    <require permission="zope.View"
+       attributes="__delitem__"
+       interface=".interfaces.ITopic
+		  zope.app.container.interfaces.IReadContainer" />
+
+    <require permission="zojax.forum.AddMessage"
+       attributes="__setitem__" />
+
+    <require permission="zojax.ModifyContent"
+       set_schema="zojax.content.type.interfaces.IItem" />
+  </class>
+
+  <!-- Create first message -->
+  <subscriber handler=".topic.topicIdAddedHandler" />
+
+  <!-- Topic modified  -->
+  <subscriber handler=".topic.topicModifiedHandler" />
+
+  <subscriber
+     for=".interfaces.ITopic
+	  zope.app.container.interfaces.IObjectAddedEvent"
+     handler=".topic.topicModifiedHandler" />
+
+  <!-- Topic removed  -->
+  <subscriber handler=".topic.topicRemovedHandler" />
+
+  <!-- Topics list -->
+  <class class=".topics.Topics">
+    <allow attributes="topics next previous" />
+  </class>
+
+  <!-- ISearchableText adapters -->
+  <adapter factory=".searchable.TopicSearchableText" />
+
+  <!-- draft -->
+  <zojax:draft
+     content="forum.topic"
+     destination="content.forum workspace.forum"
+     publish="zojax.forum.AddTopic"
+     submit="zojax.forum.SubmitTopic" />
+
+</configure>

@@ -1,0 +1,69 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <!-- forum folder view -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IForumFolder" />
+
+  <zojax:pagelet
+     name="index.html"
+     template="folder.pt"
+     for="..interfaces.IForumFolder"
+     class=".folder.FolderView"
+     permission="zope.View" />
+
+  <zojax:pagelet
+     type="content.type.view"
+     template="folderview.pt"
+     for="..interfaces.IForumFolder" />  
+
+  <browser:page
+     name="icon"
+     for="..interfaces.IForumFolder"
+     class=".folder.FolderIcon"
+     permission="zope.Public" />
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumFolder"
+     file="resources/folder_icon.gif" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumFolderType"
+     file="resources/folder_icon.gif" />
+
+  <!-- folder forums table -->
+  <adapter
+     name="forum.table.forums"
+     for="..interfaces.IForumFolder * *"
+     provides="zope.contentprovider.interfaces.IContentProvider"
+     factory=".folder.ForumsTable" />
+
+  <adapter
+     name="icon"
+     factory=".folder.IconColumn" />
+
+  <adapter
+     name="title"
+     factory=".folder.TitleColumn" />
+
+  <adapter
+     name="stats"
+     factory=".folder.StatsColumn" />
+
+  <adapter
+     name="lastPost"
+     factory=".folder.LastPostColumn" />
+
+  <zojax:pagelet
+     type="table.view"
+     for=".interfaces.IForumsTable ..interfaces.IForumFolder"
+     template="foldertable.pt" />
+
+</configure>

@@ -1,0 +1,55 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.topic">
+
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.ITopic" />
+
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.ITopic"
+     template="topic.pt"
+     class=".topic.Topic"
+     permission="zope.Public" />
+
+  <zojax:pagelet
+     name="topic.page"
+     type="pagelet"
+     for="..interfaces.ITopic"
+     template="topicpage.pt"
+     class=".topic.TopicPage" />
+
+  <zojax:pagelet
+     type="content.type.preview"
+     for="..interfaces.ITopic"
+     template="topicpreview.pt" />
+
+  <zojax:pagelet
+     type="pagelet"
+     name="forumview"
+     for="..interfaces.ITopic"
+     template="topicforumview.pt"
+     class=".topicforumview.TopicForumView" />
+
+  <zojax:pagelet
+     name="message"
+     type="form.subform"
+     for="..interfaces.ITopic
+	  zojax.content.forms.interfaces.IContentStep"
+     class=".topic.TopicMessageEdit"
+     weight="10" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.ITopic"
+     file="resources/comments.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.ITopicType"
+     file="resources/comments.png" />
+
+</configure>

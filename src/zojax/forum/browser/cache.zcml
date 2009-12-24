@@ -1,0 +1,22 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <subscriber
+     for="..interfaces.IMessage
+	  zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+     handler=".cache.forumMsgCacheHandler" />
+
+  <subscriber
+     for="..interfaces.ITopic
+	  zope.app.container.interfaces.IObjectMovedEvent"
+     handler=".cache.forumTopicCacheHandler" />
+
+  <subscriber
+     for="..interfaces.ITopic
+	  zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+     handler=".cache.forumTopicCacheHandler" />
+
+</configure>

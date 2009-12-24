@@ -1,0 +1,36 @@
+<tal:block i18n:domain="zojax.forum">
+  <td class="f-icon">&nbsp;</td>
+  <td class="f-title">
+    <a tal:content="context/title"
+       tal:attributes="href string:${view/name}/">Topic Name</a>
+    <div tal:content="structure context/description|nothing">Description</div>
+  </td>
+  <td class="f-owner">
+    <a tal:content="view/owner" tal:omit-tag="not:view/personal"
+       tal:attributes="href view/personal">Topic Owner</a>
+  </td>
+  <td class="f-stats" tal:content="view/replies">10</td>
+  <tal:block tal:define="message view/lastmessage">
+    <td class="f-info">
+      <tal:block condition="message">
+	<div class="f-date" tal:content="structure message/date">01.01.2009</div>
+	<div>
+	  <tal:block tal:omit-tag="" i18n:translate="">by</tal:block>
+	  <a tal:content="message/owner" tal:omit-tag="not:message/personal"
+	     tal:attributes="href message/personal">Message Owner</a>
+	</div>
+      </tal:block>
+      <tal:block condition="not:message">
+	------
+      </tal:block>
+    </td>
+    <td class="f-last">
+      <tal:block condition="message">
+	<a tal:attributes="href message/url" title="View last post"
+	   i18n:attribute="title">
+	  <img tal:attributes="src context/++resource++zojax-forum-resources/last_post.gif" />
+	</a>
+      </tal:block>
+    </td>
+  </tal:block>
+</tal:block>

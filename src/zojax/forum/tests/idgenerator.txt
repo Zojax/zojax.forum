@@ -1,0 +1,26 @@
+
+  >>> from zope.interface.verify import verifyClass, verifyObject
+  >>> from zojax.forum.interfaces import IIdGenerator
+  >>> from zojax.forum.idgenerator import IdGenerator
+
+  >>> verifyClass(IIdGenerator, IdGenerator)
+  True
+
+  >>> id = IdGenerator()
+
+  >>> verifyObject(IIdGenerator, id)
+  True
+
+  >>> id = IdGenerator()
+
+  >>> id.nextId
+  u'00001'
+
+  >>> id.nextId
+  u'00002'
+
+  >>> from zope.app.container.interfaces import INameChooser
+
+  >>> chooser = INameChooser(id)
+  >>> chooser.chooseName('', None)
+  u'00003'

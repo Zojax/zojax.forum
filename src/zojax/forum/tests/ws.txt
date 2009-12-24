@@ -1,0 +1,127 @@
+=============
+Browser tests
+=============
+
+    >>> from zope.interface import verify, alsoProvides
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.app.security.interfaces import IAuthentication
+    >>> from zope.publisher.browser import TestRequest
+
+    >>> from zojax.richtext.field import RichTextData
+    >>> from zojax.forum import workspace, interfaces
+
+    >>> root = getRootFolder()
+    >>> setSite(root)
+    >>> sm = root.getSiteManager()
+    >>> auth = sm.getUtility(IAuthentication)
+    >>> request = TestRequest()
+
+Forum workspace factory
+=======================
+
+    >>> factory = workspace.ForumWorkspaceFactory(root)
+    >>> print factory.isInstalled()
+    False
+
+    >>> print factory.isAvailable()
+    True
+
+    >>> factory.isInstalled()
+    False
+
+    >>> manager = factory.install()
+    >>> interfaces.IForumWorkspace.providedBy(manager)
+    True
+
+    >>> root['forum'] is manager
+    True
+
+    >>> factory.isInstalled()
+    True
+
+    >>> print manager.title
+    Forum
+    >>> root['forum'].title = u'Dev forum'
+    >>> print manager.title
+    Dev forum
+
+    >>> root['forum'].text = RichTextData('Dev forum text')
+    >>> root['forum'].text.cooked
+    u'Dev forum text'
+
+Verify contract implementation
+------------------------------
+
+    >>> verify.verifyClass(interfaces.IForumWorkspace, workspace.ForumWorkspace)
+    True
+
+    >>> verify.verifyObject(interfaces.IForumWorkspace, root['forum'])
+    True
+
+    >>> verify.verifyObject(interfaces.IForum, root['forum'])
+    True
+
+
+Uninstall forum
+---------------
+
+    >>> factory.uninstall()
+    >>> 'forum' in root
+    False
+
+
+Forums workspace factory
+=======================
+
+    >>> factory = workspace.ForumsWorkspaceFactory(root)
+    >>> print factory.isInstalled()
+    False
+
+    >>> print factory.isAvailable()
+    True
+
+    >>> factory.isInstalled()
+    False
+
+    >>> manager = factory.install()
+    >>> interfaces.IForumsWorkspace.providedBy(manager)
+    True
+
+    >>> interfaces.IForumFolder.providedBy(manager)
+    True
+
+    >>> root['forums'] is manager
+    True
+
+    >>> factory.isInstalled()
+    True
+
+    >>> print manager.title
+    Forums
+    >>> root['forums'].title = u'Dev forums'
+    >>> print manager.title
+    Dev forums
+
+
+Verify contract implementation
+------------------------------
+
+    >>> verify.verifyClass(interfaces.IForumsWorkspace, workspace.ForumsWorkspace)
+    True
+
+    >>> verify.verifyObject(interfaces.IForumsWorkspace, root['forums'])
+    True
+
+    >>> verify.verifyObject(interfaces.IForumFolder, root['forums'])
+    True
+
+
+Uninstall forums
+----------------
+
+    >>> factory.uninstall()
+    >>> 'forums' in root
+    False
+
+    >>> setSite(None)
+

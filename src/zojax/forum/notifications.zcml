@@ -1,0 +1,22 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   i18n_domain="zojax.forum">
+
+  <adapter 
+     name="forum"
+     factory=".notifications.ForumNotification" />
+
+  <class class=".notifications.ForumNotification">
+    <require
+       permission="zope.View"
+       interface=".interfaces.IForumNotification" />
+  </class>
+
+  <subscriber handler=".notifications.topicPublished" />
+  <subscriber handler=".notifications.messageAdded" />
+
+  <utility
+     name="forum"
+     factory=".notifications.ForumNotificationDescription" />
+
+</configure>

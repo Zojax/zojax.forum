@@ -1,0 +1,54 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <zojax:pageletType
+     name="forum.message.view"
+     interface=".interfaces.IMessageView" />
+
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IMessage" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="resources/comment.png"
+     for="..interfaces.IMessage" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="resources/comment.png"
+     for="..interfaces.IMessageType" />
+
+  <zojax:pagelet
+     name="reply.html"
+     for="..interfaces.ITopic"
+     template="reply.pt"
+     class=".reply.ReplyForm"
+     permission="zojax.forum.AddMessage" />
+
+  <browser:page
+     name="index.html"
+     for="..interfaces.IMessage"
+     class=".message.MessageView"
+     permission="zope.Public" />
+
+  <zojax:pagelet
+     name="preview"
+     type="wizard.step"
+     for="..interfaces.IMessage
+	  zojax.content.forms.interfaces.IEditContentWizard"
+     title="Preview"
+     template="messagepreview.pt"
+     class="zojax.wizard.step.WizardStep"
+     weight="50" />
+
+  <zojax:pagelet
+     type="forum.message.view"
+     for="..interfaces.IMessage"
+     template="message.pt"
+     class=".message.MessagePreview" />
+
+</configure>

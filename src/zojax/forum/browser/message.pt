@@ -1,0 +1,22 @@
+<div class="f-message">
+  <a tal:attributes="name context/__name__"></a>
+  <div class="f-user" tal:content="structure view/userinfo"></div>
+  <div class="f-msg-body">
+    <div class="f-msg-menu" tal:condition="nothing">
+      <a tal:define="url view/contextUrl"
+	 tal:condition="url" tal:attributes="href url">reply</a>
+      <a tal:define="url view/contextUrl"
+	 tal:condition="url" tal:attributes="href url">context</a>
+    </div>
+    <div class="f-msg-header">
+      <div class="f-title" tal:content="context/title|string:[No title]"></div>
+      <div class="f-date">« on: <span tal:content="structure view/created" /> »</div>
+    </div>
+    <div class="f-msg-content" tal:content="structure view/text"></div>
+    <div class="f-msg-details">
+      <div class="f-signature" tal:condition="view/signature">
+	<span tal:content="structure view/signature" />
+      </div>
+    </div>
+  </div>
+</div>

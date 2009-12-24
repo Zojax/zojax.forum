@@ -1,0 +1,6 @@
+<tal:block i18n:domain="zojax.forum" tal:define="data view/query">
+  <div><tal:i18n i18n:translate="">
+      <tal:block i18n:name="number" tal:content="python:data[0]"/> Posts</tal:i18n></div>
+  <div><tal:i18n i18n:translate="">
+      <tal:block i18n:name="number" tal:content="python:data[1]"/> Topics</tal:i18n></div>
+</tal:block>

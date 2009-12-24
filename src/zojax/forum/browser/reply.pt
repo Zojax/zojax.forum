@@ -1,0 +1,5 @@
+<tal:block condition="view/preview">
+  <h1 i18n:domain="zojax.forum" i18n:translate="">Preview</h1>
+  <tal:block content="structure view/preview" />
+</tal:block>
+<tal:block content="structure view/@@pagelet/form" />
