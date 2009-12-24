@@ -1,0 +1,9 @@
+<div tal:condition="view/avatar" class="f-user-avatar">
+  <a tal:attributes="href view/profile;title view/title"
+     tal:omit-tag="not:view/profile">
+    <img tal:attributes="src view/avatar" />
+  </a>
+</div>
+<a title="View member's profile"
+   i18n:attributes="title" tal:content="view/title"
+   tal:attributes="href view/profile" tal:omit-tag="not:view/profile"></a>

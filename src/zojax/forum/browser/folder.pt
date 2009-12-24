@@ -1,0 +1,23 @@
+<div class="zojax-forum" i18n:domain="zojax.forum"
+     tal:define="libs resourcepackage:zojax-forum">
+  <tal:block content="structure pagelet:+context.actions" />
+  <h1 class="z-content-title" tal:content="context/title"></h1>
+  <a href="../" class="z-content-parent" i18n:translate="">
+    Up one level
+  </a>
+  <div class="z-content-description" tal:content="context/description"></div>
+
+  <tal:block tal:content="structure pagelet:forum.views" />
+  <tal:block tal:content="structure pagelet:content.type.view" />
+
+  <div class="f-subfolder" tal:repeat="folder view/listFolders">
+    <h2 class="z-content-title">
+      <a tal:content="folder/title"
+	 tal:attributes="href string:${folder/name}/"></a></h2>
+    <div class="z-content-description" tal:content="context/description"></div>
+    <br />
+
+    <tal:block tal:define="context nocall:folder/ob"
+	       tal:content="structure provider:forum.table.forums" />
+  </div>
+</div>

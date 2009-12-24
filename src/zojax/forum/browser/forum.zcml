@@ -1,0 +1,48 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IForum" />
+
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.IForum"
+     template="forum.pt"
+     class=".forumview.Forum"
+     permission="zope.View" />
+
+  <zojax:pagelet
+     name="view"
+     type="pagelet"
+     for="..interfaces.IForum"
+     template="forumview.pt"
+     class=".forumview.ForumView" />
+
+  <zojax:pagelet
+     name="subscribe.html"
+     for="..interfaces.IForum"
+     class=".forumview.ForumSubscribe"
+     permission="zope.View" />
+
+  <browser:page
+     name="icon"
+     for="..interfaces.IForum"
+     class=".forumview.ForumIcon"
+     permission="zope.Public" />
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForum"
+     file="resources/forum_icon.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumContentType"
+     file="resources/forum_icon.png" />
+
+</configure>

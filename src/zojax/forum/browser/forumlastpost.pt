@@ -1,0 +1,21 @@
+<tal:block tal:define="lastpost view/query" i18n:domain="zojax.forum">
+  <tal:block condition="lastpost">
+    <div class="f-date" tal:content="structure lastpost/date"></div>
+    <div><tal:i18n i18n:translate="">Topic:</tal:i18n>
+      <a tal:attributes="href lastpost/url;title lastpost/title"
+   tal:content="python:lastpost['title'][:20]+'...'"></a>
+    </div>
+    <div><tal:i18n i18n:translate="">Author:</tal:i18n>
+        <div tal:condition="lastpost/avatar" class="f-user-avatar">
+          <a tal:attributes="href lastpost/profile;title lastpost/owner"
+             tal:omit-tag="not:lastpost/profile">
+            <img tal:attributes="src lastpost/avatar" />
+          </a>
+        </div>
+      <a class="nowrap" tal:content="lastpost/owner"
+   tal:attributes="href lastpost/profile"></a></div>
+  </tal:block>
+  <tal:block condition="not:lastpost">
+    ------
+  </tal:block>
+</tal:block>

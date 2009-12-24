@@ -1,0 +1,95 @@
+=============
+Browser tests
+=============
+
+    >>> from zope import component, interface, event
+    >>> from zope.interface import verify
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.app.security.interfaces import IAuthentication
+
+Admin browser
+
+    >>> admin = Browser()
+    >>> admin.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> admin.handleErrors = False
+
+Install product
+
+    >>> admin.open("http://localhost/settings/")
+    >>> admin.getLink('Products management').click()
+    >>> admin.getControl(name='availproducts:list').value = ['zojax-forum']
+    >>> admin.getControl(name='install').click()
+
+    >>> admin.open("http://localhost/space/context.html/content/")
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = ['forum']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+
+    >>> admin.open("http://localhost/space/forum/")
+
+Create topic
+
+    >>> admin.getLink('New topic').click()
+    >>> admin.getControl('Title').value = u'Test topic'
+    >>> admin.getControl('Message text').value = 'Topic message text'
+    >>> admin.getControl('Publish').click()
+
+    >>> print admin.contents
+    <html>
+    ...Your Discussion has been published...
+    <h1 class="z-content-title">Test topic</h1>
+    <div class="f-stats">
+        Replies: 0
+    </div>
+    <a href="../" class="z-content-parent">
+      Up one level
+    </a>
+    <div class="f-top">
+      <div class="f-pages">
+        <span class="f-label">Pages:</span>
+        <span>[1]</span>
+      </div>
+    </div><div class="f-messages">
+      <div class="f-message">
+        <a name="00000"></a>
+        <div class="f-user"><div class="f-user-avatar">
+        <a href="http://localhost/people/manager/" title="Manager">
+          <img src="http://localhost/@@profile.avatar/0" />
+        </a>
+      </div><a title="View member's profile" href="http://localhost/people/manager/">Manager</a></div>
+      <div class="f-msg-body">
+        <div class="f-msg-header">
+          <div class="f-title">Test topic</div>
+          <div class="f-date">« on: <span>...</span> »</div>
+        </div>
+        <div class="f-msg-content">Topic message text</div>
+        <div class="f-msg-details">
+        </div>
+      </div>
+    </div>
+    </div><a name="bottom"></a>
+    ...
+    </html>
+
+Reply
+
+    >>> admin.getControl('Title').value = 'Reply'
+    >>> admin.getControl('Message text').value = 'Reply message text'
+    >>> admin.getControl('Reply').click()
+
+    >>> print admin.contents
+    <html>
+    ...
+    ...Reply...
+    ...Reply message text...
+    ...
+    </html>
+
+
+Unistall product
+
+    >>> admin.open("http://localhost/settings/")
+    >>> admin.getLink('Products management').click()
+    >>> admin.getControl(name='products:list').value = ['zojax-forum']
+    >>> admin.getControl(name='uninstall').click()

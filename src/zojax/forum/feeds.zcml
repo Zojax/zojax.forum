@@ -1,0 +1,65 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope">
+
+  <adapter 
+     name="discussions"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.TopicsRSSFeed" />
+
+  <class class=".feeds.TopicsRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+  <adapter 
+     name="discussions"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.ForumRSSFeed" />
+
+  <class class=".feeds.ForumRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+  <adapter 
+     name="discussions"
+     for=".interfaces.IForumFolder"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.ForumRSSFeed" />
+
+  <adapter 
+     name="messages"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.MessagesRSSFeed" />
+
+  <class class=".feeds.MessagesRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+  <adapter 
+     name="messages"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.ForumMessagesRSSFeed" />
+
+  <class class=".feeds.ForumMessagesRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+  <adapter 
+     name="messages"
+     provides="zojax.content.feeds.interfaces.IRSS2Feed"
+     factory=".feeds.TopicMessagesRSSFeed" />
+
+  <class class=".feeds.TopicMessagesRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+</configure>

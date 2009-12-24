@@ -1,0 +1,68 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.forum">
+
+  <interface
+     name="Forum Content Types"
+     interface=".interfaces.IForumContentType"
+     type="zojax.content.type.interfaces.IContentTypeType" />
+
+  <interface
+     name="Forum Topic Types"
+     interface=".interfaces.ITopicContentType"
+     type="zojax.content.type.interfaces.IContentTypeType" />
+
+  <zojax:product
+     name="zojax-forum"
+     title="Forum"
+     description="Forums for zojax."
+     schema=".interfaces.IForumProduct"
+     configurable="true" />
+
+  <include file="permissions.zcml" />
+
+  <registerIn registry="zojax.product.zojax-forum">
+
+    <!-- workspace -->
+    <include file="workspace.zcml" />
+
+    <include file="forum.zcml" />
+    <include file="topic.zcml" />
+    <include file="message.zcml" />
+    <include file="feeds.zcml" />
+    <include file="notifications.zcml" />
+
+    <!-- mail-in -->
+    <class class="zojax.forum.forum.Forum">
+      <implements interface="zojax.mailin.interfaces.IMailInAware" />
+    </class>
+
+    <adapter factory=".recipient.ForumRecipient" />
+
+    <!-- browser views -->
+    <include package=".browser" />
+
+    <!-- IdGenerator NameChooser -->
+    <adapter factory=".idgenerator.NameChooser" />
+  </registerIn>
+
+  <!-- preferences -->
+  <zojax:preferenceGroup
+     id="forum"
+     title="Forum preferences"
+     description="These are all the preferences related to portal forums."
+     schema=".interfaces.IForumPreferences"
+     tests=".utils.isAvailable" />
+
+  <zojax:preferenceGroup
+     id="forum.sigs"
+     title="Signatures"
+     description="Forum message signatures."
+     schema=".interfaces.ISignatures" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales" />
+
+</configure>

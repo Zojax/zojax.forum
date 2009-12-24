@@ -1,0 +1,34 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.forum">
+
+  <zojax:content
+     title="Message"
+     name="forum.message"
+     class=".message.Message"
+     schema=".interfaces.IMessage"
+     contenttype=".interfaces.IMessageType"
+     containers=".interfaces.ITopicType"
+     permission="zojax.forum.AddMessage" />
+
+  <class class=".message.Message">
+    <implements interface="zojax.ownership.interfaces.IOwnerAware" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IContentNamesContainer" />
+    <implements interface="zojax.content.attachment.interfaces.IAttachmentsAware" />
+
+    <require permission="zope.Public"
+	     attributes="description"
+	     interface=".interfaces.IMessage" />
+
+    <require permission="zojax.ModifyContent"
+	     set_schema=".interfaces.IMessage" />
+  </class>
+
+  <subscriber handler=".message.messageModifiedHandler" />
+
+  <!-- ISearchableText adapters -->
+  <adapter factory=".searchable.MessageSearchableText" />
+
+</configure>

@@ -1,0 +1,113 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.forum">
+
+  <interface
+     name="Forum permissions"
+     interface=".interfaces.IForumPermissions"
+     type="zojax.security.interfaces.IPermissionCategoryType" />
+
+  <permission
+     id="zojax.forum.AddForum"
+     title="Add forum" />
+
+  <permission
+     id="zojax.forum.AddTopic"
+     title="Add forum discussion" />
+
+  <permission
+     id="zojax.forum.SubmitTopic"
+     title="Submit forum discussion"
+     description="Allow submit discussion to forum." />
+
+  <permission
+     id="zojax.forum.AddMessage"
+     title="Add forum message" />
+
+  <permission
+     id="zojax.forum.SubmitMessage"
+     title="Submit topic message"
+     description="Allow submit message to topic." />
+
+  <permission
+     id="zojax.forum.ManageMessage"
+     title="Manage forum message" />
+
+  <permission
+     id="zojax.forum.AddForumFolder"
+     title="Add forum folder" />
+
+  <permission
+     id="zojax.forum.DiscussContent"
+     title="Start content discussion in forum" />
+
+  <registerIn registry="zojax.product.zojax-forum">
+
+    <!-- forum permissions -->
+    <zojax:permission
+       permission="zojax.forum.AddForum"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       permission="zojax.forum.AddForum"
+       contenttype="content.forum"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumsPermission"
+       category=".interfaces.IForumPermissions" />
+
+    <!-- topic permissions -->
+    <zojax:permission
+       permission="zojax.forum.AddTopic"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:permission
+       permission="zojax.forum.SubmitTopic"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       contenttype="forum.topic"
+       permission="zojax.forum.AddTopic"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumPermission"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       contenttype="forum.topic"
+       permission="zojax.forum.SubmitTopic"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumPermission"
+       category=".interfaces.IForumPermissions" />
+
+    <!-- message -->
+    <zojax:permission
+       permission="zojax.forum.AddMessage"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       contenttype="forum.message"
+       permission="zojax.forum.AddMessage"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumPermission"
+       category=".interfaces.IForumPermissions" />
+
+    <!-- content discussion permissions -->
+    <!--zojax:permission
+       permission="zojax.forum.DiscussContent"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       permission="zojax.forum.DiscussContent"
+       contenttype="content.forum"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumsPermission"
+       category=".interfaces.IForumPermissions" /-->
+
+  </registerIn>
+
+  <subscriber 
+     factory=".permissions.forumPermissionContentTypes"
+     provides="zojax.content.permissions.interfaces.IPermissionContentTypes" />
+  
+</configure>

@@ -1,0 +1,27 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <!-- forum/folder rss action -->
+  <adapter
+     name="forum.discussion.rss"
+     factory=".actions.ForumRSSFeedAction" />
+
+  <adapter
+     name="forum.folder.discussion.rss"
+     for="..interfaces.IForumFolder *"
+     factory=".actions.ForumRSSFeedAction" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="resources/rss.png"
+     for=".interfaces.IForumRSSFeedAction" />
+
+  <!-- topic rss action -->
+  <adapter
+     name="forum.messages.rss"
+     factory=".actions.MessagesRSSFeedAction" />
+
+</configure>

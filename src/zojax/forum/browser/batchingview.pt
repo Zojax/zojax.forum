@@ -1,0 +1,36 @@
+<tal:block tal:define="base_url view/batch_url" i18n:domain="zojax.forum">
+  <span class="f-label" i18n:translate="">Pages:</span>
+  <span tal:define="batch view/first" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+
+  <span tal:define="batch view/first1" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)">...
+    </a></span>
+
+  <span tal:define="batch view/prev2" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+
+  <span tal:define="batch view/prev1" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+
+  <span>[<tal:block tal:content="view/context/number" />]</span>
+
+  <span tal:define="batch view/next1" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+
+  <span tal:define="batch view/next2" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+
+  <span tal:define="batch view/last1" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)">...
+    </a></span>
+
+  <span tal:define="batch view/last" tal:condition="batch"><a
+    tal:attributes="href python:'%s?bstart=%s' % (base_url, batch.start)" 
+    tal:content="batch/number"></a></span>
+</tal:block>

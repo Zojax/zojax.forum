@@ -1,0 +1,16 @@
+<div class="z-table-container">
+  <table tal:condition="context"
+	 tal:attributes="id context/id; class context/cssClass">
+    <tbody>
+      <tr><td class="f-spacer" colspan="4">&nbsp;</td></tr>
+      <tr tal:repeat="record context/records"
+	  tal:attributes="class python:repeat['record'].odd() and 
+			  'z-table-record odd' or 'z-table-record even'">
+	<td tal:repeat="item record"
+	    tal:content="structure item/render"
+	    tal:attributes="id item/id; class item/cssClass"></td>
+      </tr>
+      <tr><td class="f-spacer" colspan="4">&nbsp;</td></tr>
+    </tbody>
+  </table>
+</div>

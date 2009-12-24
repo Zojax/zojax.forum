@@ -1,0 +1,83 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <zojax:reservedNames
+     names="forum forums"
+     for="zojax.content.space.interfaces.IContentSpace" />
+
+  <!-- forum workspace -->
+  <adapter
+     name="forum"
+     factory=".workspace.ForumWorkspaceFactory" />
+
+  <zojax:content
+     name="workspace.forum"
+     title="Forum workspace"
+     class=".workspace.ForumWorkspace"
+     schema=".interfaces.IForumWorkspace"
+     contains="forum.topic"
+     type="zojax.content.type.interfaces.IInactiveType" />
+
+  <class class=".workspace.ForumWorkspace">
+    <implements interface="zojax.cache.interfaces.IVisibleContext" />
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+    <implements interface="zojax.ownership.interfaces.IInheritOwnership" />
+    <implements interface="zojax.content.type.interfaces.IAnnotatableOrder" />
+    <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
+    <implements interface="zojax.content.type.interfaces.IShareableContent" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IUnremoveableContent" />
+    <implements interface="zojax.content.type.interfaces.IContainerContentsAware" />
+
+    <require permission="zope.View"
+	     interface=".interfaces.IForumWorkspace
+			zope.app.container.interfaces.IReadContainer" />
+    
+    <require permission="zojax.ModifyContent"
+	     attributes="__delitem__"
+	     set_schema=".interfaces.IForum" />
+
+    <require permission="zojax.forum.AddTopic"
+	     attributes="__setitem__" />
+  </class>
+
+  <!-- forums workspace -->
+  <adapter
+     name="forums"
+     factory=".workspace.ForumsWorkspaceFactory" />
+
+  <zojax:content
+     name="workspace.forums"
+     title="Forums workspace"
+     class=".workspace.ForumsWorkspace"
+     schema=".interfaces.IForumsWorkspace"
+     contains="content.forum"
+     type="zojax.content.type.interfaces.IInactiveType" />
+
+  <class class=".workspace.ForumsWorkspace">
+    <implements interface="zojax.cache.interfaces.IVisibleContext" />
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+    <implements interface="zojax.ownership.interfaces.IInheritOwnership" />
+    <implements interface="zojax.content.type.interfaces.IAnnotatableOrder" />
+    <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
+    <implements interface="zojax.content.type.interfaces.IShareableContent" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IUnremoveableContent" />
+    <implements interface="zojax.content.type.interfaces.IContainerContentsAware" />
+
+    <require permission="zope.View"
+	     interface=".interfaces.IForumsWorkspace
+			zope.app.container.interfaces.IReadContainer" />
+    
+    <require permission="zojax.ModifyContent"
+	     attributes="__delitem__"
+	     set_schema=".interfaces.IForumFolder" />
+
+    <require permission="zojax.forum.AddForum"
+	     attributes="__setitem__" />
+  </class>
+
+</configure>

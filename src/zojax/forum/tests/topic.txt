@@ -1,0 +1,161 @@
+=============================
+IStandardTopic -  Forum topic
+=============================
+
+   >>> from zope import interface, component, event
+   >>> from zope.interface.verify import verifyClass, verifyObject
+
+   >>> from time import sleep
+   >>> from zope.dublincore.interfaces import ICMFDublinCore
+   >>> from zope.lifecycleevent import ObjectCreatedEvent, ObjectModifiedEvent
+
+   >>> from zojax.forum import interfaces
+   >>> from zojax.forum.topic import Topic
+   >>> from zojax.forum.forum import Forum
+   >>> from zojax.forum.message import Message
+   >>> from zojax.forum.interfaces import IThreadRoot 
+
+   >>> verifyClass(interfaces.ITopic, Topic)
+   True
+
+We need forum object
+
+   >>> forum = Forum()
+
+   >>> topic1 = Topic(u'Test topic')
+   >>> event.notify(ObjectCreatedEvent(topic1))
+
+   >>> topic1.title
+   u'Test topic'
+
+   >>> topic1.description
+   u''
+
+We use 'created' time for sort key
+
+   >>> dc = ICMFDublinCore(topic1)
+
+   >>> topic1_modified = dc.modified
+
+   >>> index = interfaces.ISortKeyGenerator(topic1).generate(())
+   >>> index == topic1_modified
+   True
+
+Now add topic to forum
+
+   >>> forum['00001'] = topic1
+
+Forum is IThreadRoot, we should able use this interface
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00001'>]
+
+After topic added to forum, topic create default TOPIC_FIRST_MESSAGE message
+this message contain topic text, topic icon, etc
+
+   >>> fmsg = topic1[interfaces.TOPIC_FIRST_MESSAGE]
+   >>> fmsg
+   <zojax.forum.message.Message '00000'>
+
+   >>> fmsg.text = u'Default text'
+
+We can't remove this message
+
+   >>> del topic1[interfaces.TOPIC_FIRST_MESSAGE]
+   Traceback (most recent call last):
+   ...
+   UnremovableContent: 00000
+
+Topic is IThreadRoot for messages, so we can get all messages
+
+   >>> list(IThreadRoot(topic1).elements())
+   [<zojax.forum.message.Message '00000'>]
+
+
+Let's create another topic
+
+   >>> topic2 = Topic(u'Test topic2', u'test description')
+   >>> event.notify(ObjectCreatedEvent(topic2))
+
+   >>> forum['00002'] = topic2
+
+topic2 is created later than topic2 so order is
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00001'>, <zojax.forum.topic.Topic '00002'>]
+
+
+If we update topic it should update it's sort order
+   
+   >>> sleep(1)
+
+   >>> topic1.title = u'Test topic1'
+   >>> event.notify(ObjectModifiedEvent(topic1))
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00002'>, <zojax.forum.topic.Topic '00001'>]
+
+
+Third topic
+
+   >>> topic3 = Topic(u'Test topic3')
+   >>> event.notify(ObjectCreatedEvent(topic3))
+
+   >>> forum['00003'] = topic3
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00002'>, <zojax.forum.topic.Topic '00001'>, <zojax.forum.topic.Topic '00003'>]
+
+We can get previous and next topic for any topic
+
+   >>> IThreadRoot(forum).next(topic1)
+   <zojax.forum.topic.Topic '00003'>
+   
+   >>> IThreadRoot(forum).previous(topic1)
+   <zojax.forum.topic.Topic '00002'>
+
+
+If we update any message in topic, topic also should change modified time
+
+   >>> topic2[interfaces.TOPIC_FIRST_MESSAGE].title = 'Re:'
+   >>> event.notify(ObjectModifiedEvent(topic2[interfaces.TOPIC_FIRST_MESSAGE]))
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00001'>, <zojax.forum.topic.Topic '00003'>, <zojax.forum.topic.Topic '00002'>]
+
+
+We can add new message to topic
+
+   >>> message = Message('Test message')
+   >>> event.notify(ObjectCreatedEvent(message))
+
+   >>> topic1['00001'] = message
+   
+This message should be in elements
+
+   >>> list(IThreadRoot(topic1).elements())
+   [<zojax.forum.message.Message '00000'>, <zojax.forum.message.Message '00001'>]
+
+Topic updated aswell
+
+   >>> list(IThreadRoot(forum).elements())
+   [<zojax.forum.topic.Topic '00003'>, <zojax.forum.topic.Topic '00002'>, <zojax.forum.topic.Topic '00001'>]
+
+Alwo replies count on forum
+
+   >>> forum.count_replies()
+   2
+
+
+We can remove message
+
+   >>> del topic1['00001']
+
+   >>> list(IThreadRoot(topic1).elements())
+   [<zojax.forum.message.Message '00000'>]
+
+   >>> forum.count_replies()
+   0
+
+   >>> forum.count_topics
+   3

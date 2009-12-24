@@ -1,0 +1,80 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.forum">
+
+  <include file="actions.zcml" />
+  <include file="folder.zcml" />
+  <include file="forum.zcml" />
+  <include file="topic.zcml" />
+  <include file="message.zcml" />
+  <include file="cache.zcml" />
+
+  <!-- batching views -->
+  <zojax:pagelet
+     type="batch.view"
+     for="z3c.batching.interfaces.IBatch ..interfaces.IForum"
+     class=".batchingview.BatchView"
+     template="batchingview.pt" />
+
+  <zojax:pagelet
+     type="batch.view"
+     for="z3c.batching.interfaces.IBatch ..interfaces.ITopic"
+     class=".batchingview.BatchView"
+     template="batchingview.pt" />
+
+  <!-- principal information -->
+  <zojax:pagelet
+     type="forum.principal"
+     for="zope.security.interfaces.IPrincipal"
+     template="userinfo.pt"
+     class=".userinfo.UserInformation" />
+
+  <!-- pagelet types -->
+  <zojax:pageletType
+     name="forum.views"
+     interface=".interfaces.IViews" />
+
+  <zojax:pageletType
+     name="forum.principal"
+     interface=".interfaces.IPrincipalInformation" />
+
+  <!-- notification email -->
+  <zojax:mailtemplate
+     for="..interfaces.ITopic ..interfaces.IMessage"
+     contentType="text/html"
+     template="template.pt"
+     class=".template.NotificationMail"
+     provides="zojax.content.notifications.interfaces.INotificationMailTemplate"
+     />
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumWorkspace"
+     file="resources/forum_icon.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumWorkspaceFactory"
+     file="resources/forum_icon.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IForumRSSFeed"
+     file="resources/forum_icon.png" />
+
+  <!-- resources -->
+  <zojax:resourcedirectory
+     name="zojax-forum-resources"
+     directory="resources"
+     mapping=".css:zrt .zrt:null" />
+
+  <!-- styles -->
+  <zojax:resourceinclude
+     name="zojax-forum-styles.css"
+     library="zojax-forum" type="stylesheet" filetype="zrt"
+     file="styles.css" />
+
+</configure>

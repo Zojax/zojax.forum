@@ -1,0 +1,2 @@
+<tal:block tal:define="data view/query"
+  tal:content="structure view/owner/@@pagelet/forum.principal" />

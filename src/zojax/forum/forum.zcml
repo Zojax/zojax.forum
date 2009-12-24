@@ -1,0 +1,44 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.forum">
+
+  <zojax:content
+     title="Forum"
+     name="content.forum"
+     description="Standard forum without moderation."
+     class=".forum.Forum"
+     schema=".interfaces.IForum"
+     contains="forum.topic"
+     contenttype=".interfaces.IForumType"
+     type=".interfaces.IForumContentType
+           zojax.content.type.interfaces.IActivePortalType"
+     containers="workspace.forums"
+     permission="zojax.forum.AddForum" />
+
+  <class class=".forum.Forum">
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+    <implements interface="zojax.content.type.interfaces.IShareableContent" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.ITitleBasedName" />
+    <implements 
+       interface="zojax.content.type.interfaces.IContainerContentsAware" />
+
+    <require permission="zope.View"
+	     interface=".interfaces.IForum
+			zope.app.container.interfaces.IReadContainer" />
+    
+    <require permission="zojax.ModifyContent"
+	     attributes="__delitem__"
+	     set_schema=".interfaces.IForum" />
+
+    <require permission="zojax.forum.AddTopic"
+	     attributes="__setitem__" />
+  </class>
+
+  <!-- draft -->
+  <zojax:draft
+     content="content.forum"
+     publish="zojax.forum.AddForum" />
+
+</configure>

@@ -1,0 +1,84 @@
+=========================
+Forum Mail-in destination
+=========================
+
+  >>> from email.MIMEText import MIMEText
+
+  >>> from zope import component, interface, event
+  >>> from zope.interface.verify import verifyObject
+  >>> from zope.app.component.hooks import getSite, setSite
+  >>> from zope.publisher.browser import TestRequest
+  >>> from zope.lifecycleevent import ObjectModifiedEvent
+
+  >>> from zojax.mailin.interfaces import IMailIn, IMailInDestination
+  >>> from zojax.forum.interfaces import IForumProduct
+
+  >>> root = getRootFolder()
+  >>> setSite(root)
+  >>> sm = root.getSiteManager()
+  >>> ids = root['ids']
+
+  >>> product = sm.getUtility(IForumProduct)
+  >>> product.install()
+
+  >>> root['space'].workspaces = ('forum',)
+  >>> event.notify(ObjectModifiedEvent(root['space']))
+
+  >>> forum = root['space']['forum']
+
+  >>> mailin = IMailInDestination(forum)
+
+  >>> mailin.enabled = True
+  >>> mailin.address = 'forum@zojax.net'
+
+  >>> mailin is sm.getUtility(IMailInDestination, 'forum@zojax.net')
+  True
+
+  >>> from zojax.mail.interfaces import IPrincipalByEMail
+  >>> from zope.app.security.interfaces import IAuthentication
+
+  >>> auth = sm.getUtility(IAuthentication)
+
+  >>> class PrincipalByEmail(object):
+  ...     interface.implements(IPrincipalByEMail)
+  ...     
+  ...     def getPrincipal(self, email):
+  ...         if email == 'nkim@zojax.net':
+  ...             return auth.getPrincipal('zope.user')
+  ...         if email == 'manager@zojax.net':
+  ...             return auth.getPrincipal('zope.mgr')
+
+  >>> component.provideUtility(PrincipalByEmail(), name='test')
+
+  >>> msg = MIMEText('Forum topic', 'plain', 'ascii')
+  >>> msg['Subject'] = 'Test forum topic'
+  >>> msg['From'] = 'manager@zojax.net'
+  >>> msg['To'] = 'forum@zojax.net'
+
+  >>> configlet = sm.getUtility(IMailIn)
+  >>> configlet.process(msg)
+
+  >>> topic = forum['00001']
+
+  >>> topic.title
+  u'Test forum topic'
+
+  >>> topic['00000'].text.text
+  u'Forum topic'
+
+  >>> msg = MIMEText('Topic message', 'plain', 'ascii')
+  >>> msg['Subject'] = 'Message reply'
+  >>> msg['From'] = 'manager@zojax.net'
+  >>> msg['To'] = 'forum@zojax.net'
+  >>> msg['In-Reply-To'] = '<%s@zojax.net>'%ids.getId(topic)
+
+  >>> configlet.process(msg)
+
+  >>> topic['00001'].title, topic['00001'].text.text
+  (u'Message reply', u'Topic message')
+
+
+Cleanup
+
+  >>> product.uninstall()
+  >>> setSite(None)
