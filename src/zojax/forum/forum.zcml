@@ -21,19 +21,21 @@
     <implements interface="zojax.content.type.interfaces.IShareableContent" />
     <implements interface="zojax.content.type.interfaces.ISearchableContent" />
     <implements interface="zojax.content.type.interfaces.ITitleBasedName" />
-    <implements 
+    <implements
        interface="zojax.content.type.interfaces.IContainerContentsAware" />
 
     <require permission="zope.View"
-	     interface=".interfaces.IForum
-			zope.app.container.interfaces.IReadContainer" />
-    
+       interface=".interfaces.IForum
+      zope.app.container.interfaces.IReadContainer" />
+
     <require permission="zojax.ModifyContent"
-	     attributes="__delitem__"
-	     set_schema=".interfaces.IForum" />
+       set_schema=".interfaces.IForum" />
+
+    <require permission="zojax.forum.DeleteTopic"
+       attributes="__delitem__" />
 
     <require permission="zojax.forum.AddTopic"
-	     attributes="__setitem__" />
+       attributes="__setitem__" />
   </class>
 
   <!-- draft -->

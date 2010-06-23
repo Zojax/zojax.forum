@@ -18,6 +18,10 @@
      title="Add forum discussion" />
 
   <permission
+     id="zojax.forum.DeleteTopic"
+     title="Delete forum discussion" />
+
+  <permission
      id="zojax.forum.SubmitTopic"
      title="Submit forum discussion"
      description="Allow submit discussion to forum." />
@@ -63,12 +67,23 @@
        category=".interfaces.IForumPermissions" />
 
     <zojax:permission
+       permission="zojax.forum.DeleteTopic"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:permission
        permission="zojax.forum.SubmitTopic"
        category=".interfaces.IForumPermissions" />
 
     <zojax:contentpermission
        contenttype="forum.topic"
        permission="zojax.forum.AddTopic"
+       managepermission="zojax.ManageContentPermission"
+       class=".permissions.ForumPermission"
+       category=".interfaces.IForumPermissions" />
+
+    <zojax:contentpermission
+       contenttype="forum.topic"
+       permission="zojax.forum.DeleteTopic"
        managepermission="zojax.ManageContentPermission"
        class=".permissions.ForumPermission"
        category=".interfaces.IForumPermissions" />
@@ -106,8 +121,8 @@
 
   </registerIn>
 
-  <subscriber 
+  <subscriber
      factory=".permissions.forumPermissionContentTypes"
      provides="zojax.content.permissions.interfaces.IPermissionContentTypes" />
-  
+
 </configure>
