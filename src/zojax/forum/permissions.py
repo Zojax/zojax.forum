@@ -47,6 +47,7 @@ class ForumsPermission(ContentPermission):
 @component.adapter(ISpace, interface.Interface)
 def forumPermissionContentTypes(context, permissions):
     if ('zojax.forum.AddTopic' in permissions or
+        'zojax.forum.DeleteTopic' in permissions or
         'zojax.forum.SubmitTopic' in permissions or
         'zojax.forum.AddMessage' in permissions or
         'zojax.forum.SubmitMessage' in permissions):
