@@ -26,7 +26,7 @@
     <require permission="zope.View"
        attributes="__delitem__"
        interface=".interfaces.ITopic
-		  zope.app.container.interfaces.IReadContainer" />
+      zope.app.container.interfaces.IReadContainer" />
 
     <require permission="zojax.forum.AddMessage"
        attributes="__setitem__" />
@@ -43,7 +43,7 @@
 
   <subscriber
      for=".interfaces.ITopic
-	  zope.app.container.interfaces.IObjectAddedEvent"
+    zope.app.container.interfaces.IObjectAddedEvent"
      handler=".topic.topicModifiedHandler" />
 
   <!-- Topic removed  -->
@@ -63,5 +63,19 @@
      destination="content.forum workspace.forum"
      publish="zojax.forum.AddTopic"
      submit="zojax.forum.SubmitTopic" />
+
+  <!-- content delete -->
+  <zojax:pagelet
+     name="delete.html"
+     for=".interfaces.ITopic"
+     template="delete.pt"
+     class=".delete.DeleteContent"
+     permission="zojax.forum.DeleteTopic" />
+
+  <!-- delete content -->
+  <adapter
+     name="content.delete"
+     provides="zojax.content.actions.interfaces.IDeleteContentAction"
+     factory=".delete.DeleteTopicAction" />
 
 </configure>
