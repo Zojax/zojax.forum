@@ -2,7 +2,7 @@
    xmlns="http://namespaces.zope.org/zope"
    i18n_domain="zojax.forum">
 
-  <adapter 
+  <adapter
      name="forum"
      factory=".notifications.ForumNotification" />
 
@@ -12,11 +12,25 @@
        interface=".interfaces.IForumNotification" />
   </class>
 
+  <adapter
+     name="forum.topic"
+     factory=".notifications.TopicNotification" />
+
+  <class class=".notifications.TopicNotification">
+    <require
+       permission="zope.View"
+       interface=".interfaces.ITopicNotification" />
+  </class>
+
   <subscriber handler=".notifications.topicPublished" />
   <subscriber handler=".notifications.messageAdded" />
 
   <utility
      name="forum"
      factory=".notifications.ForumNotificationDescription" />
+
+  <utility
+     name="forum.topic"
+     factory=".notifications.TopicNotificationDescription" />
 
 </configure>

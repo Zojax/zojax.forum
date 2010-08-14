@@ -38,9 +38,15 @@
      name="message"
      type="form.subform"
      for="..interfaces.ITopic
-	  zojax.content.forms.interfaces.IContentStep"
+    zojax.content.forms.interfaces.IContentStep"
      class=".topic.TopicMessageEdit"
      weight="10" />
+
+  <zojax:pagelet
+     name="subscribe.html"
+     for="..interfaces.ITopic"
+     class=".topic.TopicSubscribe"
+     permission="zope.View" />
 
   <browser:icon
      name="zmi_icon"

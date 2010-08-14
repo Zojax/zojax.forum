@@ -1,15 +1,22 @@
 <h4>
-  <a tal:attributes="href view/url" tal:content="view/message/title"></a>
-  <small>by <tal:block content="view/author"/></small>
+  <small><tal:block content="view/author"/></small> replied to
+  <a tal:attributes="href view/url" tal:content="view/topic/title"></a>
 </h4>
+Message:
+<br />
+<a tal:attributes="href view/url" tal:content="view/message/title"></a>
 <div tal:content="structure view/text"></div>
 <br />
 <hr />
 <div>
   Forum: <a tal:attributes="href string:${view/forumurl}/"
-	    tal:content="view/forum/title"></a>
+      tal:content="view/forum/title"></a>
 </div>
 <div>
   Site: <a tal:attributes="href string:${view/site/@@absolute_url}/"
-	   tal:content="view/site/title"></a>
+     tal:content="view/site/title"></a>
+</div>
+<br />
+<div>
+Use your profile settings if you would like to stop receiving updates on <a tal:attributes="href view/url" tal:content="view/topic/title"></a>
 </div>

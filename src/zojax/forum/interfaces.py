@@ -228,5 +228,9 @@ class IForumNotification(IContentNotification):
     """ forum notification """
 
 
+class ITopicNotification(IContentNotification):
+    """ topic notification """
+
+
 class IForumPermissions(IPermissionCategory):
     """ forum permissions """

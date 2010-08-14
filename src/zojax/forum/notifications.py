@@ -17,13 +17,17 @@ $Id$
 """
 from zope import interface, component
 from zope.app.container.interfaces import IObjectAddedEvent
-from zojax.subscription.interfaces import ISubscriptionDescription
+
+from zojax.subscription.interfaces import ISubscriptionDescription,\
+    SubscriptionException
 from zojax.content.draft.interfaces import IDraftPublishedEvent
 from zojax.content.notifications.utils import sendNotification
 from zojax.content.notifications.notification import Notification
+from zojax.ownership.interfaces import IOwnership
 
 from interfaces import _, TOPIC_FIRST_MESSAGE
-from interfaces import IMessage, ITopic, IForum, IForumNotification
+from interfaces import IMessage, ITopic, IForum, IForumNotification, \
+                       ITopicNotification
 
 
 class ForumNotification(Notification):
@@ -42,11 +46,42 @@ class ForumNotificationDescription(object):
     description = _(u'Forum discussions.')
 
 
+class TopicNotification(Notification):
+    component.adapts(ITopic)
+    interface.implementsOnly(ITopicNotification)
+
+    type = u'forum.topic'
+    title = _(u'Forum discussion')
+    description = _(u'Forum discussion messages.')
+
+
+class TopicNotificationDescription(object):
+    interface.implements(ISubscriptionDescription)
+
+    title = _(u'Forum discussion')
+    description = _(u'Forum discussion messages.')
+
+
+
 @component.adapter(ITopic, IDraftPublishedEvent)
 def topicPublished(topic, ev):
     sendNotification('forum', topic, topic[TOPIC_FIRST_MESSAGE])
+    notification = component.getAdapter(topic, ITopicNotification, 'forum.topic')
+    try:
+        if not notification.isSubscribed(IOwnership(topic).owner.id):
+            notification.subscribe()
+    except SubscriptionException:
+        pass
+    sendNotification('forum.topic', topic, topic[TOPIC_FIRST_MESSAGE])
 
 
 @component.adapter(IMessage, IObjectAddedEvent)
 def messageAdded(message, ev):
     sendNotification('forum', message.__parent__, message)
+    notification = component.getAdapter(message.__parent__, ITopicNotification, 'forum.topic')
+    try:
+        if not notification.isSubscribed():
+            notification.subscribe()
+    except SubscriptionException:
+        pass
+    sendNotification('forum.topic', message.__parent__, message)

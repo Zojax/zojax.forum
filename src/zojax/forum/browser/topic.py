@@ -11,6 +11,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from zope.app.security.interfaces import IUnauthenticatedPrincipal
+from zojax.content.notifications.interfaces import IContentNotification
+from zojax.statusmessage.interfaces import IStatusMessage
 """ topic view
 
 $Id$
@@ -35,6 +38,7 @@ from zojax.forum.interfaces import IForum, IForumProduct, IMessage
 
 from cache import TopicTag
 from interfaces import IMessageView
+from zojax.forum.interfaces import _
 
 
 class Topic(object):
@@ -131,3 +135,23 @@ class TopicMessageEdit(PageletEditSubForm):
 
     def getContent(self):
         return self.context[TOPIC_FIRST_MESSAGE]
+
+
+class TopicSubscribe(object):
+
+    def __call__(self):
+        request = self.request
+        principal = request.principal
+
+        if not IUnauthenticatedPrincipal.providedBy(principal):
+            notifications = getAdapter(
+                self.context, IContentNotification, 'topic')
+            if notifications.isSubscribed(principal.id):
+                notifications.unsubscribe(principal.id)
+                IStatusMessage(request).add(_('You have been unsubscribed.'))
+            else:
+                notifications.subscribe(principal.id)
+                IStatusMessage(request).add(_('You have been subscribed.'))
+
+        request.response.redirect('.')
+        return u''

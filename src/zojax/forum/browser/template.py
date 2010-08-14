@@ -34,6 +34,7 @@ class NotificationMail(object):
         super(NotificationMail, self).update()
 
         topic = self.context
+        self.topic = topic
         message = self.contexts[0]
         forum = topic.__parent__
         request = self.request
@@ -91,4 +92,4 @@ class NotificationMail(object):
 
     @property
     def subject(self):
-        return u'%s: %s'%(self.forum.title, self.message.title)
+        return u'%s: %s: %s'%(self.forum.title, self.topic.title, self.message.title)
