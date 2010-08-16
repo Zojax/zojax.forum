@@ -11,6 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from zojax.content.type.interfaces import IDraftedContent
 """
 
 $Id$
@@ -77,6 +78,8 @@ def topicPublished(topic, ev):
 
 @component.adapter(IMessage, IObjectAddedEvent)
 def messageAdded(message, ev):
+    if IDraftedContent.providedBy(message.__parent__):
+        return
     sendNotification('forum', message.__parent__, message)
     notification = component.getAdapter(message.__parent__, ITopicNotification, 'forum.topic')
     try:
