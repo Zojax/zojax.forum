@@ -18,5 +18,6 @@ Message:
 </div>
 <br />
 <div>
-Use your profile settings if you would like to stop receiving updates on <a tal:attributes="href view/url" tal:content="view/topic/title"></a>
+Click <a tal:attributes="href string:${view/topicurl}/@@notifications">here</a> if you would like to stop receiving updates on <a tal:attributes="href view/url"
+ tal:content="view/topic/title"></a>
 </div>

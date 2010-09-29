@@ -42,6 +42,7 @@ class NotificationMail(object):
         self.message = message
         self.forum = forum
         self.forumurl = absoluteURL(forum, request)
+        self.topicurl = absoluteURL(topic, request)
 
         principal = IOwnership(message).owner
 
