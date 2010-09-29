@@ -83,3 +83,7 @@ class MessagePreview(BrowserPagelet):
     def contextUrl(self):
         if checkPermission('zojax.ModifyContent', self.context):
             return '%s/context.html'%self.context.__name__
+
+    def replyUrl(self):
+        if checkPermission('zojax.forum.AddTopic', self.context.__parent__):
+            return '%s/context.html'%self.context.__name__
