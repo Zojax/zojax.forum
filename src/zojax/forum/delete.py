@@ -11,7 +11,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from zojax.content.actions.contentactions import DeleteContentAction
 """
 
 $Id$
@@ -19,7 +18,11 @@ $Id$
 from zope.security import checkPermission
 from zope.security.proxy import removeSecurityProxy
 from zope.app.component.interfaces import ISite
+from zojax.content.actions.contentactions import DeleteContentAction
+from zope.component import adapts
+from zope import interface
 
+from zojax.forum.interfaces import ITopic
 from zojax.content.browser.interfaces import _
 from zojax.statusmessage.interfaces import IStatusMessage
 from zojax.content.type.interfaces import IUnremoveableContent,IRenameNotAllowed
@@ -45,5 +48,7 @@ class DeleteContent(object):
 
 
 class DeleteTopicAction(DeleteContentAction):
+
+    adapts(ITopic, interface.Interface)
 
     permission = 'zojax.forum.DeleteTopic'
