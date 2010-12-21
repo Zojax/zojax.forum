@@ -61,22 +61,24 @@ class MessagePreview(BrowserPagelet):
             self.formatter = getFormatter(request, 'fancyDatetime', 'medium')
             self.userinfos = {}
 
-        owner = IOwnership(message).owner
+        ownership = IOwnership(message)
+        owner = ownership.owner
+        ownerId = ownership.ownerId
 
         if message.signature:
-            sigs = ISignatures(owner)
+            sigs = ISignatures(owner, None)
             self.signature = getattr(sigs, 'signature%s'%message.signature, '')
 
         self.text = message.text.cooked
         self.created = self.formatter.format(ICMFDublinCore(message).created)
 
-        userinfo = self.userinfos.get(owner.id)
+        userinfo = self.userinfos.get(ownership.ownerId)
         if userinfo is None:
             userinfo = getMultiAdapter(
                 (owner, request), IPrincipalInformation)
             userinfo.update()
             userinfo = userinfo.render()
-            self.userinfos[owner.id] = userinfo
+            self.userinfos[ownership.ownerId] = userinfo
 
         self.userinfo = userinfo
 

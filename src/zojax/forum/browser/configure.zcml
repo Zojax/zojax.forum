@@ -27,10 +27,10 @@
   <!-- principal information -->
   <zojax:pagelet
      type="forum.principal"
-     for="zope.security.interfaces.IPrincipal"
+     for="*"
      template="userinfo.pt"
      class=".userinfo.UserInformation" />
-
+  
   <!-- pagelet types -->
   <zojax:pageletType
      name="forum.views"

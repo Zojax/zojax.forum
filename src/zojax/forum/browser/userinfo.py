@@ -18,6 +18,7 @@ $Id$
 from zope.traversing.browser import absoluteURL
 from zojax.principal.profile.interfaces import IPersonalProfile
 
+from zojax.forum.interfaces import _
 
 class UserInformation(object):
 
@@ -28,11 +29,14 @@ class UserInformation(object):
         context = self.context
         request = self.request
 
-        profile = IPersonalProfile(context)
-        space = profile.space
-
-        if space:
-            self.profile = '%s/'%absoluteURL(space, request)
-
-        self.title = profile.title
-        self.avatar = profile.avatarUrl(request)
+        profile = IPersonalProfile(context, None)
+        if profile is not None:
+            space = profile.space
+    
+            if space:
+                self.profile = '%s/'%absoluteURL(space, request)
+    
+            self.title = profile.title
+            self.avatar = profile.avatarUrl(request)
+        else:
+            self.title = _(u'Unknown')
