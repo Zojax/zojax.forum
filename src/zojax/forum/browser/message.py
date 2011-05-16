@@ -62,7 +62,7 @@ class MessagePreview(BrowserPagelet):
             self.userinfos = {}
 
         ownership = IOwnership(message)
-        owner = ownership.owner
+        self.owner = owner = ownership.owner
         ownerId = ownership.ownerId
 
         if message.signature:

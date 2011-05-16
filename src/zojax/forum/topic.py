@@ -49,6 +49,16 @@ class Topic(IdGenerator, ContentContainer):
             return self.messages[self.messages.maxKey()]
         except ValueError:
             return None
+        
+    @property
+    def firstMessage(self):
+        try:
+            return self[TOPIC_FIRST_MESSAGE]
+        except IndexError:
+            return None
+        
+    def count_replies(self):
+        return len(self) - 1
 
     def __setitem__(self, key, message):
         super(Topic, self).__setitem__(key, message)

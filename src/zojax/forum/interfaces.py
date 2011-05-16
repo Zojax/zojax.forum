@@ -96,7 +96,12 @@ class ITopic(IItem):
     messages = interface.Attribute('Messages (Sorted)')
 
     lastMessage = interface.Attribute('Last message')
-
+    
+    firstMessage = interface.Attribute('First message')
+    
+    def count_replies():
+        """ count replies """
+        
 
 class ITopicType(interface.Interface):
     """ topic content type """
