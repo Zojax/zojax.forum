@@ -4,13 +4,13 @@
   <div class="f-msg-body">
     <div class="f-msg-menu" tal:condition="nothing">
       <a tal:define="url view/replyUrl"
-   tal:condition="url" tal:attributes="href url">reply</a>
+   tal:condition="url" tal:attributes="href url" i18n:translate="">reply</a>
       <a tal:define="url view/contextUrl"
-   tal:condition="url" tal:attributes="href url">context</a>
+   tal:condition="url" tal:attributes="href url" i18n:translate="">context</a>
     </div>
     <div class="f-msg-header">
       <div class="f-title" tal:content="context/title|string:[No title]"></div>
-      <div class="f-date">« on: <span tal:content="structure view/created" /> »</div>
+      <div class="f-date" i18n:translate="">« on: <span i18n:name="created" tal:content="structure view/created" /> »</div>
     </div>
     <div class="f-msg-content" tal:content="structure view/text"></div>
     <div class="f-msg-details">

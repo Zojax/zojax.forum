@@ -44,9 +44,11 @@
         <input type="text" name="form.searchforum"
                tal:attributes="value view/searchableText|nothing" />
         <input type="submit"
+	       i18n:attributes="value"
                name="form.button.search" value="Search" />
         <tal:block condition="python:view.searchResults is not None">
           <input type="submit" class="z-form-cancelbutton"
+	         i18n:attributes="value"
 		 name="form.button.clear" value="Clear" />
         </tal:block>
       </li>

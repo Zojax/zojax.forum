@@ -27,7 +27,7 @@
     <td class="f-last">
       <tal:block condition="message">
 	<a tal:attributes="href message/url" title="View last post"
-	   i18n:attribute="title">
+	   i18n:attributes="title">
 	  <img tal:attributes="src context/++resource++zojax-forum-resources/last_post.gif" />
 	</a>
       </tal:block>

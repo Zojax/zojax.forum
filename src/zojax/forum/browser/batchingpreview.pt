@@ -1,6 +1,8 @@
 <div class="f-pages" tal:define="base_url view/batch_url">
   <span>
+    <tal:block i18n:translate="">
     Pages:
+    </tal:block>
     <tal:block tal:condition="python:context.total <= 5"
          tal:repeat="batch view/batches">
       <a tal:attributes="href python:'%s?%sbstart=%s' % (base_url, batch.prefix, batch.start)"
