@@ -1,0 +1,451 @@
+##############################################################################
+#
+# Copyright (c) 2003-2004 Zope Corporation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Thu Dec  8 22:50:56 2011\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/forum/browser/actions.py:30
+#: src/zojax/forum/browser/actions.py:49
+msgid "RSS Feed"
+msgstr ""
+
+#: src/zojax/forum/browser/batchingpreview.pt:3
+msgid "Pages:"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.pt:5
+#: src/zojax/forum/browser/forum.pt:14
+#: src/zojax/forum/browser/topic.pt:12
+msgid "Up one level"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.py:111
+#: src/zojax/forum/interfaces.py:69
+#: src/zojax/forum/interfaces.py:135
+msgid "Title"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.py:129
+msgid "Stats"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.py:144
+#: src/zojax/forum/browser/forumview.pt:14
+msgid "Last post"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.py:69
+msgid "Forums listing"
+msgstr ""
+
+#: src/zojax/forum/browser/folder.py:93
+#: src/zojax/forum/interfaces.py:46
+#: src/zojax/forum/interfaces.py:80
+msgid "Icon"
+msgstr ""
+
+#: src/zojax/forum/browser/forum.pt:28
+msgid "New topic"
+msgstr ""
+
+#: src/zojax/forum/browser/forum.pt:34
+msgid "Unsubscribe"
+msgstr ""
+
+#: src/zojax/forum/browser/forum.pt:39
+msgid "Subscribe"
+msgstr ""
+
+#: src/zojax/forum/browser/forum.pt:46
+msgid "Search"
+msgstr ""
+
+#: src/zojax/forum/browser/forum.pt:50
+msgid "Clear"
+msgstr ""
+
+#: src/zojax/forum/browser/forumlastpost.pt:4
+msgid "Topic:"
+msgstr ""
+
+#: src/zojax/forum/browser/forumlastpost.pt:8
+msgid "Author:"
+msgstr ""
+
+#: src/zojax/forum/browser/forumstats.pt:3
+msgid "${number} Posts"
+msgstr ""
+
+#: src/zojax/forum/browser/forumstats.pt:5
+msgid "${number} Topics"
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.pt:11
+msgid "Subject"
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.pt:12
+msgid "Author"
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.pt:13
+msgid "Replies"
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.pt:30
+msgid "There are no discussions in this forum."
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.py:160
+#: src/zojax/forum/browser/topic.py:151
+msgid "You have been unsubscribed."
+msgstr ""
+
+#: src/zojax/forum/browser/forumview.py:163
+#: src/zojax/forum/browser/topic.py:154
+msgid "You have been subscribed."
+msgstr ""
+
+#: src/zojax/forum/browser/message.pt:13
+msgid "\302\253 on: ${created} \302\273"
+msgstr ""
+
+#: src/zojax/forum/browser/message.pt:6
+msgid "reply"
+msgstr ""
+
+#: src/zojax/forum/browser/message.pt:8
+msgid "context"
+msgstr ""
+
+#: src/zojax/forum/browser/reply.py:44
+#. Default: ""
+msgid "Post new message (${title})"
+msgstr ""
+
+#: src/zojax/forum/browser/reply.py:70
+msgid "Reply"
+msgstr ""
+
+#: src/zojax/forum/browser/reply.py:90
+#: src/zojax/forum/browser/reply.pt:2
+msgid "Preview"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:14
+msgid "Forum: ${title}"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:18
+msgid "Site: ${title}"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:25
+msgid "here"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:28
+msgid "Click ${here} if you would like to stop receiving updates on ${title}"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:3
+msgid "${author} replied to ${title}"
+msgstr ""
+
+#: src/zojax/forum/browser/template.pt:5
+msgid "Message:"
+msgstr ""
+
+#: src/zojax/forum/browser/topic.pt:18
+msgid "\302\253 previous"
+msgstr ""
+
+#: src/zojax/forum/browser/topic.pt:23
+msgid "next \302\273"
+msgstr ""
+
+#: src/zojax/forum/browser/topic.pt:9
+msgid "Replies: ${number}"
+msgstr ""
+
+#: src/zojax/forum/browser/topicforumview.pt:18
+msgid "by"
+msgstr ""
+
+#: src/zojax/forum/browser/topicforumview.pt:29
+msgid "View last post"
+msgstr ""
+
+#: src/zojax/forum/browser/topicpage.pt:18
+msgid "Go up"
+msgstr ""
+
+#: src/zojax/forum/browser/topicpage.pt:4
+msgid "Go down"
+msgstr ""
+
+#: src/zojax/forum/browser/userinfo.pt:7
+msgid "View member's profile"
+msgstr ""
+
+#: src/zojax/forum/browser/userinfo.py:42
+msgid "Unknown"
+msgstr ""
+
+#: src/zojax/forum/configure.zcml:17
+msgid "Forums for zojax."
+msgstr ""
+
+#: src/zojax/forum/configure.zcml:52
+msgid "These are all the preferences related to portal forums."
+msgstr ""
+
+#: src/zojax/forum/configure.zcml:52
+msgid "Forum preferences"
+msgstr ""
+
+#: src/zojax/forum/configure.zcml:59
+msgid "Signatures"
+msgstr ""
+
+#: src/zojax/forum/configure.zcml:59
+msgid "Forum message signatures."
+msgstr ""
+
+#: src/zojax/forum/delete.pt:12
+msgid "Delete"
+msgstr ""
+
+#: src/zojax/forum/delete.pt:2
+msgid "Are you sure you want remove this topic?"
+msgstr ""
+
+#: src/zojax/forum/delete.pt:9
+msgid "Cancel"
+msgstr ""
+
+#: src/zojax/forum/delete.py:39
+msgid "Content has been deleted."
+msgstr ""
+
+#: src/zojax/forum/feeds.py:116
+msgid "List of recently posted messages in this forum."
+msgstr ""
+
+#: src/zojax/forum/feeds.py:122
+msgid "List of recently posted messages in this discussion."
+msgstr ""
+
+#: src/zojax/forum/feeds.py:38
+msgid "Forum topics"
+msgstr ""
+
+#: src/zojax/forum/feeds.py:39
+msgid "List of recently changed forum discussions in current space and all sub spaces."
+msgstr ""
+
+#: src/zojax/forum/feeds.py:73
+msgid "List of recently changed discussion in this forum."
+msgstr ""
+
+#: src/zojax/forum/feeds.py:81
+msgid "Forum messages"
+msgstr ""
+
+#: src/zojax/forum/feeds.py:82
+msgid "List of recently posted forum messages in current space and all sub spaces."
+msgstr ""
+
+#: src/zojax/forum/forum.zcml:6
+msgid "Standard forum without moderation."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:140
+msgid "Message text"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:144
+msgid "Signature"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:145
+msgid "Signatures are displayed at the bottom of each post or personal message."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:174
+#: src/zojax/forum/vocabulary.py:23
+msgid "Signature 1"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:175
+#: src/zojax/forum/interfaces.py:181
+#: src/zojax/forum/interfaces.py:187
+msgid "Message signature."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:180
+#: src/zojax/forum/vocabulary.py:24
+msgid "Signature 2"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:186
+#: src/zojax/forum/vocabulary.py:25
+msgid "Signature 3"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:192
+msgid "Default signature"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:193
+msgid "Select signatures that will be used as default signature."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:204
+msgid "Number of topics on page."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:208
+msgid "Number of messages on page."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:47
+#: src/zojax/forum/interfaces.py:81
+msgid "Upload forum icon."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:70
+msgid "Forum title."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:74
+msgid "Description"
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:75
+msgid "Forum description."
+msgstr ""
+
+#: src/zojax/forum/interfaces.py:85
+msgid "Forum text"
+msgstr ""
+
+#: src/zojax/forum/message.zcml:6
+msgid "Message"
+msgstr ""
+
+#: src/zojax/forum/notifications.py:39
+#: src/zojax/forum/notifications.py:46
+#: src/zojax/forum/workspace.py:52
+#: src/zojax/forum/workspace.py:62
+#: src/zojax/forum/configure.zcml:17
+#: src/zojax/forum/forum.zcml:6
+msgid "Forum"
+msgstr ""
+
+#: src/zojax/forum/notifications.py:40
+#: src/zojax/forum/notifications.py:47
+msgid "Forum discussions."
+msgstr ""
+
+#: src/zojax/forum/notifications.py:55
+#: src/zojax/forum/notifications.py:62
+msgid "Forum discussion"
+msgstr ""
+
+#: src/zojax/forum/notifications.py:56
+#: src/zojax/forum/notifications.py:63
+msgid "Forum discussion messages."
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:12
+msgid "Add forum"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:16
+msgid "Add forum discussion"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:20
+msgid "Delete forum discussion"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:24
+msgid "Allow submit discussion to forum."
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:24
+msgid "Submit forum discussion"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:29
+msgid "Add forum message"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:33
+msgid "Submit topic message"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:33
+msgid "Allow submit message to topic."
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:38
+msgid "Manage forum message"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:42
+msgid "Add forum folder"
+msgstr ""
+
+#: src/zojax/forum/permissions.zcml:46
+msgid "Start content discussion in forum"
+msgstr ""
+
+#: src/zojax/forum/topic.zcml:6
+msgid "Start discussion in forum."
+msgstr ""
+
+#: src/zojax/forum/topic.zcml:6
+msgid "Discussion"
+msgstr ""
+
+#: src/zojax/forum/workspace.py:53
+msgid "Check this box if you want only one forum on your site."
+msgstr ""
+
+#: src/zojax/forum/workspace.py:70
+msgid "Check this box if you want 2 or more forums on your site."
+msgstr ""
+
+#: src/zojax/forum/workspace.py:79
+msgid "Forums"
+msgstr ""
+
+#: src/zojax/forum/workspace.zcml:16
+msgid "Forum workspace"
+msgstr ""
+
+#: src/zojax/forum/workspace.zcml:52
+msgid "Forums workspace"
+msgstr ""
+
